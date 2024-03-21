@@ -7,7 +7,8 @@ Paper:
 ## Introduction
 BiSHop leverages a sparse Hopfield model with adaptable sparsity, enhanced by column-wise and row-wise modules. It's specifically designed to address challenges in processing rotationally invariant and sparse tabular data.
 
-## Install via Conda and Pip
+## Installation
+### Install the Environment
 For setting up Conda environments and installing necessary packages, refer to the commands provided below (*Pleaseinstall PyTorch according to the specific version of CUDA on your system*).
 
  ```
@@ -15,9 +16,17 @@ conda create -n BiSHop python=3.10
 conda activate BiSHop
 pip3 install torch --index-url https://download.pytorch.org/whl/cu121 # please install based on corresponding version
 pip3 install -r requirements.txt
- ```
+```
 
- ## Reproduce Experiments
+### Download Code and Datasets
+To clone the project repository to your local machine, execute the following command:
+```bash
+git clone https://github.com/MAGICS-LAB/Bi-SHop.git
+```
+For the datasets necessary for Baseline I, download them from the link below and place them in the `datasets` directory:
+[Download Baseline I Datasets](https://drive.google.com/drive/folders/1T3oIYKXqnxyXhs-bHpGKABjR3tOHsAyr?usp=sharing)
+
+## Reproduce Experiments
 ### Recording Runs
 To record run details, update your API key in `utils/wandb_api_key.txt` and use the `--record` argument.
 

@@ -9,7 +9,7 @@ BiSHop leverages a sparse Hopfield model with adaptable sparsity, enhanced by co
 
 ## Installation
 ### Install the Environment
-For setting up Conda environments and installing necessary packages, refer to the commands provided below (*Pleaseinstall PyTorch according to the specific version of CUDA on your system*).
+For setting up Conda environments and installing necessary packages, refer to the commands provided below (*Please install PyTorch according to the specific version of CUDA on your system*).
 
  ```
 conda create -n BiSHop python=3.10

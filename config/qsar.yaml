@@ -1,0 +1,29 @@
+parameters:
+  out_len:
+    value: 8
+  patch_dim:
+    value: 6
+  emb_dim:
+    value: 32
+  n_agg:
+    value: 3
+  factor:
+    value: 15
+  d_model:
+    value: 128
+  d_ff:
+    value: 1024
+  n_heads:
+    value: 4
+  e_layers:
+    value: 4
+  d_layers:
+    value: 1
+  dropout:
+    value: 0.0
+  learning_rate:
+    value: 0.00008689737882387254
+  seed:
+    value: 154
+  data:
+    value: 'Spambase'

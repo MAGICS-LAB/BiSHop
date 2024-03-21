@@ -1,0 +1,29 @@
+parameters:
+  out_len:
+    value: 4
+  patch_dim:
+    value: 4
+  emb_dim:
+    value: 256
+  n_agg:
+    value: 8
+  factor:
+    value: 15
+  d_model:
+    value: 512
+  d_ff:
+    value: 1024
+  n_heads:
+    value: 12
+  e_layers:
+    value: 3
+  d_layers:
+    value: 0
+  dropout:
+    value: 0
+  learning_rate:
+    value: 0.00000355408744384186
+  seed:
+    value: 66
+  data:
+    value: 'adult'

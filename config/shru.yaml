@@ -1,0 +1,29 @@
+parameters:
+  out_len:
+    value: 4
+  patch_dim:
+    value: 6
+  emb_dim:
+    value: 16
+  n_agg:
+    value: 4
+  factor:
+    value: 15
+  d_model:
+    value: 256
+  d_ff:
+    value: 256
+  n_heads:
+    value: 6
+  e_layers:
+    value: 4
+  d_layers:
+    value: 1
+  dropout:
+    value: 0.3
+  learning_rate:
+    value: 0.00002568589072300374
+  seed:
+    value: 736
+  data:
+    value: 'Shrutime'

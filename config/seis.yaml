@@ -1,0 +1,29 @@
+parameters:
+  out_len:
+    value: 32
+  patch_dim:
+    value: 12
+  emb_dim:
+    value: 48
+  n_agg:
+    value: 4
+  factor:
+    value: 10
+  d_model:
+    value: 64
+  d_ff:
+    value: 128
+  n_heads:
+    value: 12
+  e_layers:
+    value: 1
+  d_layers:
+    value: 1
+  dropout:
+    value: 0.1
+  learning_rate:
+    value: 0.00005691946763899204
+  seed:
+    value: 143
+  data:
+    value: 'SeismicBumps'

@@ -1,0 +1,29 @@
+parameters:
+  out_len:
+    value: 24
+  patch_dim:
+    value: 8
+  emb_dim:
+    value: 32
+  n_agg:
+    value: 4
+  factor:
+    value: 10
+  d_model:
+    value: 256
+  d_ff:
+    value: 512
+  n_heads:
+    value: 4
+  e_layers:
+    value: 3
+  d_layers:
+    value: 1
+  dropout:
+    value: 0.2
+  learning_rate:
+    value: 0.000005
+  seed:
+    value: 2
+  data:
+    value: '1995_income'

@@ -1,0 +1,29 @@
+parameters:
+  out_len:
+    value: 64
+  patch_dim:
+    value: 6
+  emb_dim:
+    value: 64
+  n_agg:
+    value: 4
+  factor:
+    value: 5
+  d_model:
+    value: 64
+  d_ff:
+    value: 64
+  n_heads:
+    value: 10
+  e_layers:
+    value: 2
+  d_layers:
+    value: 1
+  dropout:
+    value: 0.4
+  learning_rate:
+    value: 0.00000591814100502582
+  seed:
+    value: 4225
+  data:
+    value: 'blastchar'

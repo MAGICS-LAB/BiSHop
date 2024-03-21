@@ -22,8 +22,13 @@ pip3 install -r requirements.txt
 To clone the project repository to your local machine, execute the following command:
 ```bash
 git clone https://github.com/MAGICS-LAB/Bi-SHop.git
+cd Bi-SHop
 ```
-For the datasets necessary for Baseline I, download them from the link below and place them in the `datasets` directory:
+For the datasets for Baseline I, please first create the `datasets` folder
+```bash
+mkdir datasets
+```
+Please download them from the link below and place them in the `datasets` directory:
 [Download Baseline I Datasets](https://drive.google.com/drive/folders/1T3oIYKXqnxyXhs-bHpGKABjR3tOHsAyr?usp=sharing)
 
 ## Reproduce Experiments

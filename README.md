@@ -1,4 +1,4 @@
-# Bi-SHop
+# BiSHop: Bi-Directional Cellular Learning for Tabular Data with Generalized Sparse Modern Hopfield Model
 
 <!---
 Author: [Chenwei Xu](https://chenwei-1999.github.io/), Yu-Chao Huang, Jerry Yao-Chieh Hu, Weijian Li, Ammar Gilani, Hsi-Sheng Goan, Han Liu

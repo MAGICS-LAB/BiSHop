@@ -66,3 +66,15 @@ To reproduce benchmark results, please checkout other available `Branches`.
 <!---
  ## Citation
  -->
+
+## Citation
+If you find our work useful, please consider citing our paper:
+```
+@inproceedings{xu2024bishop,
+  title={BiSHop: Bi-Directional Cellular Learning for Tabular Data with Generalized Sparse Modern Hopfield Model},
+  author={Xu, Chenwei and Huang, Yu-Chao and Hu, Jerry Yao-Chieh and Li, Weijian and Gilani, Ammar and Goan, Hsi-Sheng and Liu, Han},
+  booktitle={Forty-first International Conference on Machine Learning (ICML)},
+  year={2024},
+  url={https://arxiv.org/abs/2404.03830}
+}
+```

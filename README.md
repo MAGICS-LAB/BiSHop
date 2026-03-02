@@ -1,7 +1,7 @@
 # BiSHop: Bi-Directional Cellular Learning for Tabular Data with Generalized Sparse Modern Hopfield Model
 
 [![arXiv](https://img.shields.io/badge/arXiv-2404.03830-b31b1b.svg)](https://arxiv.org/abs/2404.03830)
-[![ICML 2024](https://img.shields.io/badge/ICML-2024-blue.svg)](https://icml.cc/virtual/2024/poster/33674)
+[![ICML 2024](https://img.shields.io/badge/ICML-2024-blue.svg)](https://icml.cc/virtual/2024/poster/32967)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.2%2B-EE4C2C.svg)](https://pytorch.org/)

@@ -8,10 +8,10 @@
 
 [Chenwei Xu](https://chenwei-1999.github.io/)<sup>1</sup>,
 Yu-Chao Huang<sup>2</sup>,
-[Jerry Yao-Chieh Hu](https://jerryyaochiehhu.github.io/)<sup>1</sup>,
+[Jerry Yao-Chieh Hu](https://northwestern.jerryhu.page/)<sup>1</sup>,
 Weijian Li<sup>1</sup>,
 Ammar Gilani<sup>1</sup>,
-[Hsi-Sheng Goan](https://www.phys.ntu.edu.tw/~goan/)<sup>2</sup>,
+[Hsi-Sheng Goan](https://web.phys.ntu.edu.tw/goan/)<sup>2</sup>,
 [Han Liu](https://magics.cs.northwestern.edu/people.html)<sup>1</sup>
 
 <sup>1</sup> Northwestern University &nbsp;&nbsp; <sup>2</sup> National Taiwan University

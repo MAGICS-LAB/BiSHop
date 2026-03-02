@@ -2,9 +2,6 @@ import torch
 
 from models.attn import GSHLayer, BAModule
 from einops import rearrange, repeat
-import torch
-import random
-import numpy as np
 
 class DecoderLayer(torch.nn.Module):
   # patch_dim : seg_len

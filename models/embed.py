@@ -1,23 +1,20 @@
-import numpy
 import torch
 
 from einops import rearrange, repeat
-
-import torch
-import random
-import numpy as np
 
 class NumEmb(torch.nn.Module):
   """
   Numerical embedding for tabular data
 
-  Description: 
-    TO BE FILLED
+  Description: Implements piecewise linear encoding based on quantiles. For each numerical
+  feature, emb_dim quantile boundaries are computed from training data, and each value is
+  encoded as a emb_dim-dimensional vector with values in [0, 1] based on its position within
+  the corresponding quantile bin.
 
   Parameters:
   ----------
-  n_num   : Number of categorical features.
-  emb_dim : Number of classes in categorical features.
+  n_num   : Number of numerical features.
+  emb_dim : Embedding dimension (number of quantile bins).
   """
   def __init__(self, n_num, emb_dim):
     super(NumEmb, self).__init__()
@@ -124,34 +121,6 @@ class SharedEmbedding(torch.nn.Module):
       share = self.share.expand(out.shape[0], -1, -1)
       out = torch.cat((out, share), dim=-1)
     return out
-
-# class SharedEmbedding(torch.nn.Module):
-#   def __init__(self, n_class, emb_dim, share=True, share_add=False, share_div=8):
-#     super().__init__()
-#     if share:
-#       if share_add:
-#         shared_embed_dim = emb_dim
-#         self.embed = torch.nn.Embedding(n_class, emb_dim)
-#       else:
-#         # shared_embed_dim = emb_dim // share_div
-#         shared_embed_dim = 0
-#         self.embed = torch.nn.Embedding(n_class, emb_dim - shared_embed_dim)
-#       self.share = torch.nn.Parameter(torch.empty(1, 1, shared_embed_dim))
-#       _trunc_normal_(self.share.data, std=0.01)
-#       self.share_add = share_add
-#     else: 
-#       self.embed = torch.nn.Embedding(n_class, emb_dim)
-#       self.share = None
-
-#   def forward(self, x):
-#     out = self.embed(x).unsqueeze(1)
-#     if self.share is None: return out
-#     if self.share_add:
-#       out += self.share
-#     else:
-#       share = self.share.expand(out.shape[0], -1, -1)
-#       out = torch.cat((out, share), dim=-1)
-#     return out
 
 class CatEmb(torch.nn.Module):
   """

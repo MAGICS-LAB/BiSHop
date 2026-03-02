@@ -7,10 +7,6 @@ from models.embed import PatchEmb
 from models.encoder import Encoder
 from models.decoder import Decoder
 
-import torch
-import random
-import numpy as np
-
 def ifnone(a, b):
   # From fastai.fastcore
   "`b` if `a` is None else `a`"
@@ -103,7 +99,7 @@ class BAModel(torch.nn.Module):
     
     self.n_pool_records = [n_pool_enc]
     for i in range(1, e_layer + 1):
-      self.n_pool_records.append(math.ceil(self.n_pool_records[-1]/n_agg**i))
+      self.n_pool_records.append(math.ceil(self.n_pool_records[-1]/n_agg))
     self.n_pool_total = sum(self.n_pool_records)
 
     self.d_layer = d_layer
@@ -131,8 +127,6 @@ class BAModel(torch.nn.Module):
 
       dec_final = self.decoder(dec_in, enc_out)
 
-      return dec_final
-      # print(dec_final.shape)
       return dec_final
     elif self.d_layer==0:
       enc_final = enc_out[-1]

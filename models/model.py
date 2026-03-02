@@ -1,22 +1,17 @@
-import math
 import torch
 
-from einops import rearrange, repeat
+from einops import rearrange
 
 from models.embed import CatEmb, NumEmb
-from models.encoder import Encoder
-
 from models.module import MLP, BAModel
-
-import torch
-import random
-import numpy as np
 
 class BiSHop(torch.nn.Module):
   """
   The main class for BiSHop model.
 
-  Description: TO BE FILLED
+  Description: End-to-end deep learning framework for tabular data using Generalized Sparse
+  Modern Hopfield Model. Combines categorical and numerical embeddings with a bi-directional
+  sparse Hopfield encoder-decoder architecture for both classification and regression tasks.
 
   Parameters
   ----------
@@ -67,7 +62,6 @@ class BiSHop(torch.nn.Module):
     self.n_num = n_num
     if n_cat != 0:
       self.CatEmb = CatEmb(n_cat, emb_dim, n_class, share, share_add, share_div, full_dropout, emb_dropout)
-      self.Emb = torch.nn.Embedding(num_embeddings=n_class, embedding_dim=emb_dim)
     if n_num != 0:
       self.NumEmb = NumEmb(n_num, emb_dim)
     
@@ -98,9 +92,9 @@ class BiSHop(torch.nn.Module):
     
     if self.n_cat == 0:
       x = num_emb
-    if self.n_num == 0:
+    elif self.n_num == 0:
       x = cat_emb
-    if self.n_cat != 0 and self.n_num != 0:
+    else:
       x = torch.cat([cat_emb, num_emb], dim=1)
 
     if self.flip:
@@ -113,7 +107,6 @@ class BiSHop(torch.nn.Module):
   def _to(self, device):
     if self.n_cat != 0:
       self.CatEmb = self.CatEmb.to(device)
-      self.Emb = self.Emb.to(device)
     if self.n_num != 0:
       self.NumEmb._to(device)
     self.BAModel = self.BAModel.to(device)

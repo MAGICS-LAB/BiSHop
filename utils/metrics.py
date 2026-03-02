@@ -26,12 +26,12 @@ def RMSE(pred, true):
     return np.sqrt(MSE(pred, true))
 
 def MAPE(pred, true):
-    return np.mean(np.abs((pred - true) / true))
+    return np.mean(np.abs((pred - true) / np.clip(true, a_min=1e-8, a_max=None)))
 
 def MSPE(pred, true):
-    return np.mean(np.square((pred - true) / true))
+    return np.mean(np.square((pred - true) / np.clip(true, a_min=1e-8, a_max=None)))
 def ACC(pred, true):
-    pred = torch.tensor(pred.argmax(axis=1))
+    pred = pred.argmax(axis=1).clone().detach()
     metric = BinaryAccuracy()
     metric.update(pred, true)
     return metric.compute()
@@ -47,7 +47,7 @@ def AUC(pred, true):
     return metric.compute()
 
 def MultiACC(pred, true, num_classes):
-    pred = torch.tensor(pred.argmax(axis=1))
+    pred = pred.argmax(axis=1).clone().detach()
     return multiclass_accuracy(pred, true, average="macro", num_classes=num_classes)
 
 def MultiF1(pred, true, num_classes):
@@ -61,12 +61,12 @@ def MutiAUC(pred, true, num_classes):
     return metric.compute()
 
 def confusion(pred, true):
-    pred = torch.tensor(pred.argmax(axis=1))
+    pred = pred.argmax(axis=1).clone().detach()
     tn, fp, fn, tp = confusion_matrix(true, pred).ravel()
     return (tn, fp, fn, tp)
 
 def metric(pred, true, num_classes):
-    true = torch.tensor(true)
+    true = true.clone().detach()
     acc = MultiACC(pred, true, num_classes)
     f1 = MultiF1(pred, true, num_classes)
     auc = MutiAUC(pred, true, num_classes)

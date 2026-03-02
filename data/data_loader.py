@@ -199,8 +199,8 @@ class Blastchar(Dataset):
     self.cat_idx = [data.columns.get_loc(c) for c in self.cat_cols if c in data]
     data.columns = [c.replace("-", "_") for c in data.columns]
     # replace Senior Citizen to binary lable
-    data['SeniorCitizen'].mask(data['SeniorCitizen'] == 0, "Yes", inplace=True)
-    data['SeniorCitizen'].mask(data['SeniorCitizen'] == 1, "No", inplace=True)
+    data['SeniorCitizen'].mask(data['SeniorCitizen'] == 0, "No", inplace=True)
+    data['SeniorCitizen'].mask(data['SeniorCitizen'] == 1, "Yes", inplace=True)
     data['TotalCharges'] = data['TotalCharges'].astype(str).astype(float)
     self.data = data
 
@@ -295,7 +295,7 @@ class Spambase(Dataset):
                       'word_freq_re', 'word_freq_edu', 'word_freq_table', 'word_freq_conference',
                       'char_freq_;', 'char_freq_(', 'char_freq_[', 'char_freq_!', 'char_freq_$',
                       'char_freq_#', 'capital_run_length_average', 'capital_run_length_longest',
-                      'capital_run_length_total', 'spam']
+                      'capital_run_length_total']
     self.cat_cols = []  # No categorical columns
     self.target_col = 'spam'
     self.N_cat = len(self.cat_cols)
@@ -304,7 +304,7 @@ class Spambase(Dataset):
 
     self.data = pandas.read_csv(os.path.join(self.root_path, self.data_path))
     self.cat_idx = [self.data.columns.get_loc(c) for c in self.cat_cols if c in self.data]
-    self.data.columns = self.num_cols
+    self.data.columns = self.num_cols + [self.target_col]
     # Convert target column to integer
     self.data[self.target_col] = self.data[self.target_col].astype(int)
 

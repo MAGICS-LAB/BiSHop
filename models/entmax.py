@@ -10,10 +10,6 @@ The code is from https://github.com/deep-spin/entmax/blob/master/entmax/activati
 
 import torch
 
-import torch
-import random
-import numpy as np
-
 def _make_ix_like(X, dim):
   d = X.size(dim)
   rho = torch.arange(1, d + 1, device=X.device, dtype=X.dtype)

@@ -108,6 +108,6 @@ def main():
             if args.record: wandb.log({"MSE": mse, "MAE": mae, "RMSE": rmse, "MAPE": mape, "MSPE": mspe, "R2":r2})
 
         torch.cuda.empty_cache()
-        wandb.finish()
+        if args.record: wandb.finish()
 
 main()

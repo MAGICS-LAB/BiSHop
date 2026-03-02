@@ -4,28 +4,19 @@ import torch
 from models.attn import BAModule
 from einops import repeat
 
-import torch
-import random
-import numpy as np
-
 class PatchMerge(torch.nn.Module):
   """
-  Merge adjecent patch together .
-  
+  Merge adjacent patches together in the encoder hierarchy.
+
   Description
   ----------
-  TO BE FILLED
-  
+  Aggregates n_agg adjacent patches into a single patch via concatenation followed by
+  a linear projection, implementing the hierarchical coarsening in the encoder.
+
   Parameters
   ----------
-  d_model : Number of features.
-  n_agg   : number of sperate patched to aggregate together
-
-  Input
-  ----------
-  
-  Output
-  ----------
+  d_model : Number of features per patch.
+  n_agg   : Number of adjacent patches to aggregate together.
   """
   def __init__(self, d_model=512, n_agg=4):
     super(PatchMerge, self).__init__()
@@ -61,22 +52,17 @@ class PatchMerge(torch.nn.Module):
     
 class EncoderLayer(torch.nn.Module):
   """
-  The encoder layer.
-  
+  Single encoder layer combining patch merging with bi-directional attention.
+
   Description
   ----------
-  TO BE FILLED
-  
+  First merges adjacent patches (if n_agg > 1) to reduce spatial resolution,
+  then applies the BAModule for bi-directional feature and embedding attention.
+
   Parameters
   ----------
-  d_model : Number of features.
-  n_agg   : number of sperate patched to aggregate together
-
-  Input
-  ----------
-  
-  Output
-  ----------
+  d_model : Number of features per patch.
+  n_agg   : Number of adjacent patches to aggregate together.
   """
   def __init__(self, n_agg=4, n_pool=10, factor=10, actv='entmax', hopfield=True, d_model=512, n_heads=8, d_ff=1024, dropout=0.2,):
     super(EncoderLayer, self).__init__()
@@ -97,22 +83,19 @@ class EncoderLayer(torch.nn.Module):
   
 class Encoder(torch.nn.Module):
   """
-  Merge adjecent patch together .
-  
+  Hierarchical encoder with stacked BiSHopModule layers.
+
   Description
   ----------
-  TO BE FILLED
-  
+  Stacks multiple EncoderLayers with progressive patch merging. The first layer
+  processes the original resolution, and subsequent layers merge n_agg patches at
+  each level, producing multi-scale representations for the decoder.
+
   Parameters
   ----------
-  d_model : Number of features.
-  n_agg   : number of sperate patched to aggregate together
-
-  Input
-  ----------
-  
-  Output
-  ----------
+  e_layers : Number of encoder layers.
+  n_agg    : Number of adjacent patches to aggregate at each level.
+  d_model  : Number of features per patch.
   """
   def __init__(self, e_layers=3, n_agg=4, d_model=512, n_heads=8, d_ff=1024, dropout=0.2, n_pool=10, factor=10, actv='entmax', hopfield=True):
     super(Encoder, self).__init__()

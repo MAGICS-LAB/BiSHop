@@ -1,9 +1,7 @@
 import numpy as np
 import torch
 import json
-import torch
 import pandas
-import random
 import openml
 
 from sklearn.ensemble import RandomForestClassifier
@@ -109,7 +107,7 @@ def get_feature_importance(args, mode):
     if mode == 'most': remove_percent = args.rf_most / 100
     elif mode == 'least': remove_percent = args.rf_least / 100
 
-    number_remove = np.round(len(forest_sort) * remove_percent).astype(np.int)
+    number_remove = np.round(len(forest_sort) * remove_percent).astype(int)
     if mode == 'most': index_remove = forest_sort[:number_remove]
     if mode == 'least': index_remove = forest_sort[-number_remove:]
     print('removing ', number_remove, ' features')
@@ -130,7 +128,7 @@ def get_feature_importance(args, mode):
 def get_random_feature(args):
     X, Y = _get_XY(args, 'train')
     remove_percent = args.rf_rand / 100
-    number_remove = np.round(X.shape[1] * remove_percent).astype(np.int)
+    number_remove = np.round(X.shape[1] * remove_percent).astype(int)
     index_remove = np.random.choice(np.arange(0, X.shape[1]+1), size=number_remove, replace=False)
     print('removing', number_remove, ' features')
     print('index remove ', index_remove)
@@ -166,7 +164,7 @@ def _get_XY(args, flag):
         raise ValueError(f"Data source '{args.data}' is not supported.")
 
     data = data_class(root_path=args.root_path, data_path=args.data_path, splits=[0.7, 0.2, 0.1])
-    X_cat, X_num, Y, _, _ = data._get_raw(batch_size=args.batch_size, flag=flag, extra=None)
+    X_cat, X_num, Y, _, _ = data._get_raw(batch_size=args.batch_size, flag=flag, extra=None, seed=args.seed)
     X = torch.cat((X_cat, X_num), 1)
     return X, Y
 
@@ -220,11 +218,11 @@ def _check_data(args):
         '1995_income': {'data': 'income_1995.data', 'n_cat': 8, 'n_num': 6, 'task': 'classification', 'n_classes': 2},
         'SeismicBumps': {'data': 'seismic-bumps.arff', 'n_cat': 4, 'n_num': 14, 'task': 'classification', 'n_classes': 2},
         'Shrutime': {'data': 'shrutime.csv', 'n_cat': 4, 'n_num': 6, 'task': 'classification', 'n_classes': 2},
-        'Spambase': {'data': 'spambase.data', 'n_cat': 0, 'n_num': 58, 'task': 'classification', 'n_classes': 2},
+        'Spambase': {'data': 'spambase.data', 'n_cat': 0, 'n_num': 57, 'task': 'classification', 'n_classes': 2},
         'Qsar': {'data': 'biodeg.csv', 'n_cat': 0, 'n_num': 41, 'task': 'classification', 'n_classes': 2},
-        'California': {'data': 'housing.csv', 'n_cat': 1, 'n_num': 9, 'task': 'regression'},
+        'California': {'data': 'housing.csv', 'n_cat': 1, 'n_num': 9, 'task': 'regression', 'n_classes': 1},
         'Jannis': {'data': 'jannis.arff', 'n_cat': 0, 'n_num': 54, 'task': 'classification', 'n_classes': 4},
-        'ForestCoverType': {'data': 'covtype.data', 'n_cat': 0, 'n_num': 54}
+        'ForestCoverType': {'data': 'covtype.data', 'n_cat': 0, 'n_num': 54, 'task': 'classification', 'n_classes': 7}
     }
     if args.data in data_parser.keys():
         data_info = data_parser[args.data]

@@ -4,15 +4,13 @@ import torch
 from models.entmax import EntmaxAlpha, Sparsemax
 from einops import rearrange, repeat
 
-import torch
-import random
-import numpy as np
-
 class GSH(torch.nn.Module):
   '''
   Generalized Sparse Hopfield module
 
-  Description: TO BE FILLED
+  Description: Implements the core sparse attention mechanism using alpha-entmax activation
+  instead of softmax, enabling sparse retrieval patterns. Supports softmax (dense), sparsemax,
+  and learnable alpha-entmax activations for controlling sparsity in attention weights.
 
   Parameters
   ----------
@@ -46,9 +44,11 @@ class GSH(torch.nn.Module):
 
 class GSHLayer(torch.nn.Module):
   '''
-  Generalized Sparse Hopfield (GSH) layer 
-  
-  Description: TO BE FILLED
+  Generalized Sparse Hopfield (GSH) layer
+
+  Description: Wraps the GSH module with multi-head Q/K/V projections. In Hopfield mode, values
+  are derived from projected keys (V = K * W_V) following the Hopfield retrieval formulation.
+  In standard mode, values are projected independently as in classical Transformer attention.
 
   Parameters
   ----------
@@ -113,9 +113,14 @@ class GSHLayer(torch.nn.Module):
 
 class BAModule(torch.nn.Module):
   """
-  BAModule takes 
+  Bi-directional Attention Module (BiSHopModule)
 
-  Description: TO BE FILLED
+  Description: Implements bi-directional cellular learning with two stages:
+  (1) Column-wise block: applies GSH self-attention across the patch dimension for each
+      feature independently, capturing intra-feature patterns.
+  (2) Row-wise block: uses learnable pooling vectors to aggregate cross-feature information
+      via GSHPooling, then distributes it back via GSH cross-attention, building feature-to-feature
+      connections with reduced computational complexity (C << N).
 
   Parameters
   ----------

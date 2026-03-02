@@ -1,33 +1,21 @@
 import os
+import time
+
+import numpy as np
 import torch
+import torch.nn as nn
+from torch import optim
+from torch.nn import DataParallel
+import torch.optim.lr_scheduler as lr_scheduler
+import wandb
+
 from data.data_loader import Adult, Bank, Blastchar, Income_1995, SeismicBumps, Shrutime
 from data.data_loader import Spambase, Qsar, California, Jannis
 from data.data_loader import OpenML
 from exp.exp_basic import Exp_Basic
 from models.model import BiSHop
-
-from utils.tools import EarlyStopping, adjust_learning_rate
-from utils.metrics import metric, regre_metric
-from utils.metrics import confusion
-from utils.tools import sec2hhmmss
-
-import numpy as np
-
-import torch
-import torch.nn as nn
-from torch import optim
-from torch.nn import DataParallel
-import torch.utils.data as data_utils
-import torch.optim.lr_scheduler as lr_scheduler
-
-import os
-import time
-import json
-import pickle
-import wandb
-
-import warnings
-warnings.filterwarnings('ignore')
+from utils.tools import EarlyStopping, adjust_learning_rate, sec2hhmmss
+from utils.metrics import metric, regre_metric, confusion
 
 classification_list = ['categorical_classification', 'categorical_classification_small', 'categorical_classification_large',
                         'numerical_classification', 'numerical_classification_small', 'numerical_classification_large']
@@ -91,7 +79,7 @@ class Exp_BiSHop(Exp_Basic):
     mlp_hidden=(4,2,1), 
     mlp_skip=False, 
     mlp_softmax=False, 
-    device=torch.device('cuda:0')
+    device=self.device
     ).float()
 
     # print('# of params', sum(p.numel() for p in model.parameters() if p.requires_grad))
@@ -184,7 +172,7 @@ class Exp_BiSHop(Exp_Basic):
     criterion =  self._select_criterion()
 
     # learning rate scheduler
-    scheduler = lr_scheduler.ReduceLROnPlateau(model_optim, factor=0.1, eps=1e-6, verbose=True)
+    scheduler = lr_scheduler.ReduceLROnPlateau(model_optim, factor=0.1, eps=1e-6)
 
     for epoch in range(self.args.train_epochs):
       time_now = time.time()
